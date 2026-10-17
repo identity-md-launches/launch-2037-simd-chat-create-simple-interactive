@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b1113" />
+    <title>Synapse — Neural playground</title>
+    <meta name="description" content="Explore a living neural network. Send pulses through glowing connections and shape your own simulation environment." />
+    <meta property="og:title" content="Synapse — Follow the signal." />
+    <meta property="og:description" content="A living neural network, yours to explore. An interactive canvas playground." />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="./social.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Synapse neural playground with luminous green and violet connections on a dark field." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="stylesheet" href="./src/style.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#playground">Skip to playground</a>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Synapse home">
+        <svg class="brand-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="m8 7 16 6-14 12 1-12 13 12M8 7l3 6 13 0" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="7" r="3" fill="currentColor"/><circle cx="24" cy="13" r="3" fill="currentColor"/><circle cx="10" cy="25" r="3" fill="currentColor"/><circle cx="24" cy="25" r="2" fill="currentColor"/><circle cx="11" cy="13" r="2" fill="currentColor"/></svg>
+        <span>synapse<span class="brand-period">.</span></span>
+      </a>
+      <div class="header-actions">
+        <span class="sandbox-label"><span class="small-orbit" aria-hidden="true"></span> Neural playground</span>
+        <button class="text-button" id="help-button" type="button"><span class="icon" data-icon="help"></span><span>How to explore</span></button>
+      </div>
+    </header>
+
+    <main class="workspace" id="playground">
+      <section class="intro" aria-labelledby="page-title">
+        <h1 id="page-title">Follow the<br class="desktop-break" /> signal<span class="accent-period">.</span></h1>
+        <p>A living network.<br class="desktop-break" /> Yours to explore.</p>
+      </section>
+
+      <section class="scene" aria-label="Neural network playground">
+        <div class="scene-heading">
+          <span class="network-status"><span class="status-dot" aria-hidden="true"></span><span id="motion-status">Network active</span></span>
+          <div class="network-stats" aria-label="Network statistics"><span><strong id="node-count">72</strong> nodes</span><span class="stat-divider" aria-hidden="true"></span><span><strong id="link-count">0</strong> <span class="connections-label">connections</span><span class="links-label">links</span></span></div>
+        </div>
+        <div class="canvas-wrap" id="canvas-wrap">
+          <canvas id="network" role="img" tabindex="0" aria-label="Glowing neural network. Arrow keys move the view. Use Inspect node to select a node, then send a pulse."></canvas>
+          <p class="canvas-error" id="canvas-error" hidden>The canvas is unavailable. Try opening this page in a browser with HTML5 canvas support.</p>
+          <div class="map-caption" aria-hidden="true"><span class="crosshair"></span><span>Explore the space between.</span></div>
+          <div class="view-controls" role="group" aria-label="Map view">
+            <button class="icon-button" id="zoom-out" type="button" aria-label="Zoom out" title="Zoom out"><span class="icon" data-icon="minus"></span></button>
+            <output id="zoom-value" aria-label="Zoom level">100%</output>
+            <button class="icon-button" id="zoom-in" type="button" aria-label="Zoom in" title="Zoom in"><span class="icon" data-icon="plus"></span></button>
+            <span class="control-divider" aria-hidden="true"></span>
+            <button class="icon-button" id="reset-view" type="button" aria-label="Reset view" title="Reset view"><span class="icon" data-icon="fit"></span></button>
+          </div>
+        </div>
+        <div class="scene-bottom">
+          <div class="node-inspector">
+            <label for="node-select">Inspect node</label>
+            <div class="node-selection"><select id="node-select" aria-describedby="node-detail"></select><span id="node-detail">0 connections</span></div>
+          </div>
+          <div class="pulse-counter"><span class="icon" data-icon="activity"></span><span><strong id="pulse-count">0</strong> <span id="pulse-label">pulses sent</span></span></div>
+        </div>
+        <div class="action-area">
+          <div class="action-dock">
+            <button class="pause-button" id="pause-button" type="button" aria-label="Pause simulation" aria-keyshortcuts="Space" title="Pause simulation (Space)"><span class="icon" id="pause-icon" data-icon="pause"></span></button>
+            <button class="primary-button" id="pulse-button" type="button" aria-keyshortcuts="Enter" title="Send a pulse (Enter)"><span class="icon" data-icon="pulse"></span><span>Send a pulse</span><span class="key-hint" aria-hidden="true">↵</span></button>
+          </div>
+          <p class="interaction-hint">Select a node. See where it leads.</p>
+          <p class="sr-only" role="status" id="announcement"></p>
+        </div>
+      </section>
+
+      <details class="environment" id="environment" open>
+        <summary><span class="environment-heading"><span class="icon" data-icon="sliders"></span>Environment</span><span class="icon disclosure-icon" data-icon="chevron"></span></summary>
+        <div class="environment-body">
+          <fieldset class="palette-field">
+            <legend>Color atmosphere</legend>
+            <div class="palette-options">
+              <label class="palette-option"><input type="radio" name="palette" value="aurora" checked /><span class="palette-swatch aurora-swatch" aria-hidden="true"></span><span>Aurora</span></label>
+              <label class="palette-option"><input type="radio" name="palette" value="ion" /><span class="palette-swatch ion-swatch" aria-hidden="true"></span><span>Ion</span></label>
+              <label class="palette-option"><input type="radio" name="palette" value="ember" /><span class="palette-swatch ember-swatch" aria-hidden="true"></span><span>Ember</span></label>
+            </div>
+          </fieldset>
+          <div class="range-field"><div class="field-label"><label for="density">Network density</label><output id="density-value" for="density">Balanced</output></div><input id="density" type="range" min="0" max="2" value="1" step="1" aria-valuetext="Balanced, 72 nodes" /><div class="range-endpoints" aria-hidden="true"><span>Sparse</span><span>Dense</span></div></div>
+          <div class="range-field"><div class="field-label"><label for="speed">Signal speed</label><output id="speed-value" for="speed">1.0×</output></div><input id="speed" type="range" min="0.25" max="2" value="1" step="0.25" aria-valuetext="1 times speed" /></div>
+          <button id="regenerate-button" class="secondary-button" type="button"><span class="icon" data-icon="refresh"></span>Regenerate network</button>
+          <p class="settings-note">Your atmosphere and speed stay.</p>
+        </div>
+      </details>
+    </main>
+
+    <footer class="site-footer"><span><span class="local-dot" aria-hidden="true"></span>Local simulation<span class="footer-detail"> · No two journeys alike.</span></span><span class="footer-instructions">Drag to move <span>·</span> Scroll to zoom <span>·</span> <kbd>Space</kbd> to pause</span><span class="version">Sandbox 01</span></footer>
+
+    <dialog id="help-dialog" aria-labelledby="help-title">
+      <div class="dialog-heading"><h2 id="help-title">Make a connection.</h2><button class="icon-button" id="close-help" type="button" aria-label="Close help"><span class="icon" data-icon="close"></span></button></div>
+      <p>Synapse is a visual playground for a simulated neural network. Everything happens on your device.</p>
+      <dl class="help-list"><div><dt>Send a pulse</dt><dd>Select a glowing node, then send a signal through its connections. Use Inspect node to select with a keyboard, or Enter outside a control to send a pulse.</dd></div><div><dt>Find your perspective</dt><dd>Drag the field to move, or focus it and use arrow keys. On a phone, drag sideways; vertical swipes scroll the page. Use + and − to zoom. Reset view brings the network back.</dd></div><div><dt>Change the atmosphere</dt><dd>Choose a color, adjust the density or change the signal speed. Regenerate creates a fresh pattern.</dd></div><div><dt>Take a breath</dt><dd>Pause with the pause button or press Space outside a control. With reduced motion, pulses appear as still highlights. Resume explicitly enables animation.</dd></div></dl>
+      <button class="secondary-button" id="explore-button" type="button">Start exploring<span class="icon" data-icon="arrow"></span></button>
+    </dialog>
+    <noscript><div class="noscript">Enable JavaScript to explore the interactive network.</div></noscript>
+    <script type="module" src="./src/main.ts"></script>
+  </body>
+</html>
